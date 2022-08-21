@@ -7,6 +7,10 @@
 
 import Foundation
 
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 /// An Authenticator for URL Requests which makes use of the RequestAdapter from Alamofire.
 final class JWTRequestsAuthenticator {
 
