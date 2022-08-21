@@ -12,7 +12,6 @@ public typealias ECKeyData = Data
 
 extension ECKeyData {
     public func toPrivateKey() throws -> ECPrivateKey {
-        var error: Unmanaged<CFError>?
         return try P256.Signing.PrivateKey(x963Representation: self)
     }
 }
