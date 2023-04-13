@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
 
 /// An URLSession based RequestExecutor implemention
 public final class DefaultRequestExecutor: RequestExecutor {

@@ -77,7 +77,7 @@ let request = APIEndpoint
         fieldsApps: [.appInfos, .name, .bundleID],
         limit: 2
     ))
-
+        
 // Demonstration of AsyncSequence result of APIProvider.paged(_)
 var allApps: [App] = []
 for try await pagedResult in provider.paged(request) {
@@ -90,13 +90,13 @@ let firstPageResult = try await provider.request(request)
 let firstPageApps = firstPageResult.data
 print("The first page of results has \(firstPageApps.count) apps")
 
-if provider.request(request, isPagedResponse: firstPageResult) {
+if provider.request(request, isPagedResponse: firstPageResult) {        
     if let nextPage = try await provider.request(request, pageAfter: firstPageResult) {
         let secondPageApps = nextPage.data
         print("The second page of results has \(secondPageApps.count) apps")
     }
-}
-```
+}            
+``` 
 
 ### Handling errors
 Whenever an error is returned from a request, you can get the details by catching the error as follows:
@@ -123,7 +123,7 @@ For more info regarding errors, see: [Parsing the Error Response Code](https://d
 
 ### Swift Package Manager
 
-The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. It is in early development, but this SDK does support its use on supported platforms.
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. It is in early development, but this SDK does support its use on supported platforms. 
 
 Once you have your Swift package set up, adding the SDK as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
 
@@ -138,7 +138,7 @@ dependencies: [
 To help with the development of this repository you need to follow the next steps:
 
 - clone this repository
-- download the submodules dependencies
+- download the submodules dependencies 
 ```bash
 git submodule update --init --recursive
 ```
@@ -148,38 +148,17 @@ bundle exec fastlane test
 ```
 
 ### Update OpenAPI generated code
-
-Install [jq](https://stedolan.github.io/jq/):
-```bash
-brew install jq
-```
-
-Run the following:
+Using [CreateAPI](https://github.com/CreateAPI/CreateAPI), run the following:
 
 ```bash
-$ make update
+$ swift package --allow-writing-to-package-directory generate-open-api
 ```
-
-This will attempt to download the App Store Connect [OpenAPI specification](https://developer.apple.com/sample-code/app-store-connect/app-store-connect-openapi-specification.zip) from Apple, and re-run the [CreateAPI](https://github.com/CreateAPI/CreateAPI) generator to produce the updated source code.
-
-Alternatively, you can run `make download` and `make generate` individually.
 
 ## Communication
 
 - If you **found a bug**, open an [issue](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues).
 - If you **have a feature request**, open an [issue](https://github.com/AvdLee/appstoreconnect-swift-sdk/issues).
 - If you **want to contribute**, submit a [pull request](https://github.com/AvdLee/appstoreconnect-swift-sdk/pulls).
-
-## Applications that use the SDK
-
-- [Starly: reviews, reply to apps](https://apps.apple.com/app/id1644699015) developed by [Viktor Grushevskiy](https://twitter.com/Viktorianec).
-The Starly app is a project that will allow developers to manage reviews on the App Store with ease. You can reply to them, translate them to the language you want, filter them, and create templates. iOS and macOS versions available.
-
-- [🌟 Superstar: App Store Review manager](https://apps.apple.com/us/app/superstar-respond-to-reviews/id1635833987) developed by [Jordi Bruin](https://twitter.com/jordibruin).
-Superstar uses the App Store Connect API to help you respond to your App Store customer reviews in seconds. Use custom templates to quickly reply with professional responses. Translate reviews and your responses directly with free DeepL integration. Available for free for a limited time.
-
-- [AppsMan: Manage app metada globally](https://apps.apple.com/app/id6443788342) developed by [Karmjit Singh](https://twitter.com/CodeWithKarma).
-The AppsMan app is a project that will allow developers to manage apps localisable data on the App Store with ease. You can easily update the data for one language and copy over to other and save. You can see the previous versions details as well. Only macOS versions available.
 
 
 ## License
